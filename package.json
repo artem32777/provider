@@ -1,0 +1,44 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --host",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint . --no-cache",
+    "lint:fix": "eslint . --fix --no-cache"
+  },
+  "dependencies": {
+    "@nuxt-alt/auth": "^3.1.7",
+    "@nuxt-alt/http": "^1.7.10",
+    "@nuxt-alt/proxy": "^2.5.8",
+    "@nuxt/fonts": "^0.11.4",
+    "@nuxt/ui": "^3.0.0-beta.4",
+    "@pinia/nuxt": "^0.11.2",
+    "@vueuse/nuxt": "^12.7.0",
+    "hash.js": "^1.1.7",
+    "maska": "^3.1.1",
+    "normalize.css": "^8.0.1",
+    "nuxt": "^3.17.6",
+    "pinia": "^3.0.1",
+    "uuid": "^11.1.0",
+    "vue": "latest",
+    "vue-final-modal": "^4.5.5",
+    "vue-router": "latest",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@feature-sliced/cli": "^1.0.0",
+    "@nuxt/eslint": "^1.1.0",
+    "@types/uuid": "^10.0.0",
+    "eslint": "^9.21.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "sass": "^1.85.1",
+    "typescript": "^5.8.2",
+    "vite-plugin-eslint2": "^5.0.3",
+    "vue-tsc": "^2.2.2"
+  }
+}

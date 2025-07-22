@@ -1,0 +1,61 @@
+---
+networks:
+  traefik:
+    name: traefik
+    external: true
+
+services:
+  frontend-prod:
+    image: '${IMAGE}'
+    container_name: ${APP_ROUTE_NAME}-front
+    env_file: .env
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - >
+        sh -c
+        "if [[ $(wget -qS http://localhost:3000
+        2>&1 | grep "HTTP/" | awk '{print $2}') -eq 200 ]];
+        then exit 0;
+        else exit 1;
+        fi"
+      interval: 20s
+      timeout: 30s
+      retries: 3
+    labels:
+      ### Разрешить traefik отслеживать этот сервис
+      - "traefik.enable=true"
+
+      ### Ручное указание порта для сервиса
+      - "traefik.http.services.${APP_ROUTE_NAME}.loadbalancer.server.port=${PORT}"
+
+      ### HTTP роут
+      - "traefik.http.routers.${APP_ROUTE_NAME}-http.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.${APP_ROUTE_NAME}-http.entrypoints=web"
+
+      ### HTTPS роут + certresolver
+      - "traefik.http.routers.${APP_ROUTE_NAME}-https.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.${APP_ROUTE_NAME}-https.entrypoints=websecure"
+      - "traefik.http.routers.${APP_ROUTE_NAME}-https.tls=true"
+      - "traefik.http.routers.${APP_ROUTE_NAME}-https.tls.certresolver=myresolver"
+
+      ### Перенаправлять все запросы c http на https
+      - "traefik.http.routers.${APP_ROUTE_NAME}-http.middlewares=redirect-https"
+      - "traefik.http.middlewares.redirect-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.redirect-https.redirectscheme.permanent=true"
+
+      ### Включить сжатие
+      - "traefik.http.routers.${APP_ROUTE_NAME}-http.middlewares=app-compress"
+      - "traefik.http.middlewares.${APP_ROUTE_NAME}-compress.compress=true"
+
+      ## basic auth (after gzip!)
+      - "traefik.http.routers.${APP_ROUTE_NAME}-http.middlewares=auth"
+      - "traefik.http.routers.${APP_ROUTE_NAME}-https.middlewares=auth"
+      - "traefik.http.middlewares.auth.basicauth.users=qtim:$$apr1$$l1ixhv7n$$.ja6hyrN1TOOqj.BB6HX01"
+
+      ### Для работы с несколькими сетями
+      - "traefik.docker.network=traefik"
+
+    networks:
+      - traefik

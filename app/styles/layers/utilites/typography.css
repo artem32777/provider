@@ -1,0 +1,46 @@
+@layer base{
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply text-(--black-900) font-bold leading-[110%];
+	}
+	.desktop-h1 {
+		@apply text-[50px] tracking-[0px] uppercase;
+	}
+	.mobile-h1 {
+		@apply text-[40px] tracking-[0px] uppercase;
+	}
+	.desktop-h2 {
+		@apply text-[48px] tracking-[0px] uppercase;
+	}
+	.mobile-h2 {
+		@apply text-[32px] tracking-[0px] uppercase;
+	}
+	.desktop-h3 {
+		@apply text-[40px] tracking-[1.2px];
+	}
+	.mobile-h3 {
+		@apply text-[28px] tracking-[0.6px];
+	}
+	.desktop-h4 {
+		@apply text-[32px] tracking-[0.8px];
+	}
+	.mobile-h4 {
+		@apply text-[24px] tracking-[0.3px];
+	}
+	.desktop-h5 {
+		@apply text-[24px];
+	}
+	.mobile-h5 {
+		@apply text-[20px];
+	}
+	.desktop-body-s {
+		@apply text-[16px] leading-[140%];
+	}
+	.mobile-body-m {
+		@apply text-[16px] leading-[140%];
+	}
+}

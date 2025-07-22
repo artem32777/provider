@@ -1,0 +1,67 @@
+@use "./breakpoint" as *;
+
+@mixin absoluteFull() {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin absoluteCenter() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin textOverflow($linesAmount: 1) {
+  display: -webkit-box;
+  line-clamp: $linesAmount;
+  -webkit-line-clamp: $linesAmount;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@mixin aspectRatioProductImage() {
+  aspect-ratio: 65 / 86;
+  height: auto !important;
+}
+
+// Mobile First
+@mixin adaptive($width) {
+  @media (width >= $width) {
+    @content;
+  }
+}
+
+@mixin adaptive2xs () {
+	@include adaptive($breakpoint-2xs) {
+		@content;
+	};
+}
+
+@mixin adaptiveSm () {
+	@include adaptive($breakpoint-sm) {
+		@content;
+	};
+}
+
+@mixin adaptiveMd () {
+	@include adaptive($breakpoint-md) {
+		@content;
+	};
+}
+
+@mixin adaptiveLg () {
+	@include adaptive($breakpoint-lg) {
+		@content;
+	};
+}
+
+@mixin adaptiveXl () {
+	@include adaptive($breakpoint-xl) {
+		@content;
+	};
+}

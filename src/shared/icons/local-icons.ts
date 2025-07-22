@@ -1,0 +1,16 @@
+export const enum LocalIcons {
+	camera = 'i-local-camera',
+	email = 'i-local-email',
+	hide = 'i-local-hide',
+	liveChat = 'i-local-live-chat',
+	telegram = 'i-local-telegram',
+	whatsapp = 'i-local-whatsapp',
+	x = 'i-local-x',
+	cloud = 'i-local-cloud',
+	share = 'i-local-share',
+	settings = 'i-local-settings',
+	component = 'i-local-component',
+	chess = 'i-local-chess',
+	clip = 'i-local-clip',
+	eyeX = 'i-local-eye-x',
+}
